@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import axios from '../axiosConfig'; // Import the Axios configuration
 
 const AuthContext = createContext();
 
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserData = async (token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await axios.get('/api/profile', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -47,13 +47,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginWithGoogle = async (credential) => {
     try {
-      const response = await fetch('http://localhost:5000/api/google-auth', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ credential }),
-      });
+      const response = await axios.post('/api/google-auth', { credential });
 
       if (response.ok) {
         const data = await response.json();

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from "../axiosConfig"; 
 import { Search } from 'lucide-react';
 
 // Connect to the socket server
@@ -24,7 +24,7 @@ function CommunityChat() {
   const fetchPreviousMessages = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await axios.get('http://localhost:5000/api/messages', {
+      const response = await axios.get('/api/messages', {
         headers: {
           withCredentials: true,
           'Authorization': `Bearer ${token}`

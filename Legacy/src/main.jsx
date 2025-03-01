@@ -4,11 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
-import axios from 'axios';
+import axios from './axiosConfig'; // Import the Axios configuration
 import './index.css';
-
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:5000'; // Set your base URL here
 
 const container = document.getElementById('root');
 const root = createRoot(container);
