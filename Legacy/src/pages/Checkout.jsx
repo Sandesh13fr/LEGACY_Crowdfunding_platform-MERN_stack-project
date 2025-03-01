@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "../axiosConfig"; 
 import qrImage from '../assets/qr.jpeg';
 
 function Checkout() {
@@ -12,7 +12,7 @@ function Checkout() {
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/campaigns', {
+        const response = await axios.get('/api/campaigns', {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           },

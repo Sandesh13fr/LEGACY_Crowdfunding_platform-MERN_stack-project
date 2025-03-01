@@ -18,14 +18,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:5173", // Update this to match your Vite frontend URL
+    origin: "https://legacymd.vercel.app", // Update this to match your Vite frontend URL
     methods: ["GET", "POST"],
     credentials: true
   }
 });
 
 app.use(cors({
-  origin: "http://localhost:5173", // Add this line
+  origin: "https://legacymd.vercel.app", // Add this line
   methods: ["GET", "POST", "PUT", "DELETE"], // Include PUT and DELETE if you use them
   credentials: true
 }));
@@ -60,7 +60,15 @@ const authMiddleware = (req, res, next) => {
     return res.status(401).json({ error: 'Authentication failed' });
   }
 };
+const rateLimit = require('express-rate-limit');
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again later'
+});
+
+app.use(limiter);
 // Setup file upload storage
 // Create uploads directory if it doesn't exist
 const uploadPath = path.join(__dirname, 'uploads');

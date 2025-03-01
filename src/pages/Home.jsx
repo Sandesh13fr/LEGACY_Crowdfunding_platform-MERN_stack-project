@@ -3,27 +3,12 @@ import { Heart, Apple, Users, Stethoscope, GraduationCap, Play, ArrowRight } fro
 import CountUp from 'react-countup';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import axios from "../axiosConfig"; 
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [campaigns, setCampaigns] = useState([]);
   const modalRef = useRef(null);
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchCampaigns = async () => {
-      try {
-        const response = await axios.get("/api/campaigns");
-        setCampaigns(response.data);
-      } catch (error) {
-        console.error("Error fetching campaigns:", error);
-      }
-    };
-
-    fetchCampaigns();
-  }, []);
 
   const handleWatchVideoClick = () => {
     setIsModalOpen(true);
@@ -47,11 +32,11 @@ function Home() {
     };
   }, [isModalOpen]);
 
-  const handleDonateClick = (campaignTitle) => {
+  const handleDonateClick = () => {
     if (!isLoggedIn) {
       navigate('/signin');
     } else {
-      navigate(`/Checkout?campaign=${encodeURIComponent(campaignTitle)}`);
+      navigate(`/Checkout?compaign=${encodeURIComponent(compaignTitle)}`);
     }
   };
 
@@ -71,7 +56,7 @@ function Home() {
               <div className="flex gap-4">
                 <button 
                   className="bg-emerald-600 text-white px-8 py-3 rounded-full hover:bg-emerald-700 transition-colors flex items-center gap-2"
-                  onClick={() => handleDonateClick('')}
+                  onClick={handleDonateClick}
                 >
                   Donate Now <Heart className="w-5 h-5" />
                 </button>
@@ -169,23 +154,43 @@ function Home() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {campaigns.map((campaign, index) => (
+            {[
+              {
+                image: "https://images.unsplash.com/photo-1522661067900-ab829854a57f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                title: "Education for Rural Communities",
+                goal: 50000,
+                raised: 35000
+              },
+              {
+                image: "https://images.unsplash.com/photo-1559079236-2e64f89c7764?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                title: "Clean Water Initiative",
+                goal: 25000,
+                raised: 20000
+              },
+              {
+                image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=800",
+                title: "Healthcare Access Program",
+                goal: 100000,
+                raised: 75000
+              }
+            ].map((campaign, index) => (
               <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg">
-                <img src={`data:${campaign.posterImage.contentType};base64,${campaign.posterImage.data}`} alt={campaign.title} className="w-full h-48 object-cover" />
+                <img src={campaign.image} alt={campaign.title} className="w-full h-48 object-cover" />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">{campaign.title}</h3>
                   <div className="mb-4">
                     <div className="flex justify-between text-sm text-gray-600 mb-2">
-                      <span>Goal: ${campaign.goalAmount.toLocaleString()}</span>
+                      <span>Raised: ${campaign.raised.toLocaleString()}</span>
+                      <span>Goal: ${campaign.goal.toLocaleString()}</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div 
                         className="bg-emerald-600 h-2 rounded-full" 
-                        style={{ width: `${(campaign.raised / campaign.goalAmount) * 100}%` }}
+                        style={{ width: `${(campaign.raised / campaign.goal) * 100}%` }}
                       ></div>
                     </div>
                   </div>
-                  <button className="w-full bg-emerald-600 text-white py-2 rounded-full hover:bg-emerald-700 transition-colors" onClick={() => handleDonateClick(campaign.title)} >
+                  <button className="w-full bg-emerald-600 text-white py-2 rounded-full hover:bg-emerald-700 transition-colors" onClick={handleDonateClick} >
                     Donate Now
                   </button>
                 </div>
@@ -208,7 +213,7 @@ function Home() {
               </p>
               <button 
                 className="bg-white text-emerald-600 px-8 py-3 rounded-full hover:bg-emerald-50 transition-colors"
-                onClick={() => handleDonateClick('')}
+                onClick={handleDonateClick}
               >
                 Donate Now
               </button>

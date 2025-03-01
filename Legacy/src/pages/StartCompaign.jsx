@@ -45,7 +45,7 @@ const StartCampaign = () => {
 
     try {
       const token = localStorage.getItem('authToken'); // Assuming the token is stored in localStorage
-      const response = await fetch('http://localhost:5000/api/campaigns', {
+      const response = await fetch('/api/campaigns', {
         method: 'POST',
         body: formData,
         headers: {

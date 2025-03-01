@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Menu, X, User } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
   const navLinks = [
@@ -14,13 +14,14 @@ function Navbar() {
     { to: "/campaigns", label: "Campaigns" },
     { to: "/community-chat", label: "Community Chat" },
     { to: "/about", label: "About" },
+    
   ];
 
   const handleDonateClick = () => {
     if (!isLoggedIn) {
       navigate('/signin');
     } else {
-      navigate('/checkout');
+      // Handle the donate action
     }
   };
 
@@ -28,7 +29,7 @@ function Navbar() {
     <header className="bg-white py-4 px-6 fixed w-full z-50 shadow-sm">
       <div className="container mx-auto flex justify-between items-center">
         <NavLink to="/" className="flex items-center text-2xl font-bold text-emerald-600 hover:text-emerald-700 hover:scale-105 transition-transform">
-          <img src="https://iili.io/2MViMs2.png" alt="Logo" className="w-12 h-12 object-cover" />
+          <img src="./src/assets/logo.png" alt="Logo" className="w-12 h-12 object-cover" />
           LEGACY
         </NavLink>
 
@@ -47,9 +48,7 @@ function Navbar() {
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `text-gray-500 hover:text-gray-800 ${
-                  isActive ? 'text-gray-600 underline decoration-2 decoration-emerald-700 font-semibold' : ''
-                }`
+                `text-gray-500 hover:text-gray-800 ${isActive ? 'text-gray-600 underline decoration-2 decoration-emerald-700 font-semibold' : ''}`
               }
             >
               {link.label}
@@ -57,24 +56,22 @@ function Navbar() {
           ))}
         </nav>
 
-        {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-4">
-          <button
+          <button 
             className="bg-emerald-500 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition-colors"
             onClick={handleDonateClick}
           >
             Donate Now
           </button>
           {isLoggedIn ? (
-            <NavLink 
-              to="/profile"
-              className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2 rounded-full hover:bg-emerald-700 transition-colors"
+            <button 
+              className="bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors"
+              onClick={logout}
             >
-              <User className="w-5 h-5" />
-              Profile
-            </NavLink>
+              Logout
+            </button>
           ) : (
-            <NavLink
+            <NavLink 
               to="/signin"
               className="bg-emerald-500 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition-colors"
             >
@@ -93,33 +90,28 @@ function Navbar() {
                   to={link.to}
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
-                    `py-2 text-gray-600 hover:text-emerald-600 ${
-                      isActive ? 'text-emerald-600 font-semibold' : ''
-                    }`
+                    `py-2 text-gray-600 hover:text-emerald-600 ${isActive ? 'text-emerald-600 font-semibold' : ''}`
                   }
                 >
                   {link.label}
                 </NavLink>
               ))}
-              <button
+              <button 
                 className="mt-4 bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition-colors"
                 onClick={handleDonateClick}
               >
                 Donate Now
               </button>
               {isLoggedIn ? (
-                <NavLink
-                  to="/profile"
-                  onClick={() => setIsOpen(false)}
-                  className="mt-4 text-xl bg-emerald-200 text-center px-2 py-2 rounded-full hover:bg-emerald-700 transition-colors font-black flex items-center justify-center gap-2"
+                <button 
+                  className="mt-4 text-xl bg-emerald-200 text-center px-2 py-2 rounded-full hover:bg-emerald-700 transition-colors font-black"
+                  onClick={logout}
                 >
-                  <User className="w-5 h-5" />
-                  Profile
-                </NavLink>
+                  Logout
+                </button>
               ) : (
-                <NavLink
+                <NavLink 
                   to="/signin"
-                  onClick={() => setIsOpen(false)}
                   className="mt-4 text-xl bg-emerald-200 text-center px-2 py-2 rounded-full hover:bg-emerald-700 transition-colors font-black"
                 >
                   Login
