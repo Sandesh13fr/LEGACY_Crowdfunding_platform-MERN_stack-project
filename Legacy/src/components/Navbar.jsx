@@ -27,15 +27,8 @@ function Navbar() {
   return (
     <header className="bg-white py-4 px-6 fixed w-full z-50 shadow-sm">
       <div className="container mx-auto flex justify-between items-center">
-        <NavLink
-          to="/"
-          className="flex items-center text-2xl font-bold text-emerald-600 hover:text-emerald-700 hover:scale-105 transition-transform"
-        >
-          <img
-            src="https://iili.io/2MViMs2.png"
-            alt="Logo"
-            className="w-12 h-12 object-cover"
-          />
+        <NavLink to="/" className="flex items-center text-2xl font-bold text-emerald-600 hover:text-emerald-700 hover:scale-105 transition-transform">
+          <img src="https://iili.io/2MViMs2.png" alt="Logo" className="w-12 h-12 object-cover" />
           LEGACY
         </NavLink>
 
