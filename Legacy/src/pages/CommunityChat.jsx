@@ -8,7 +8,7 @@ import { Search } from 'lucide-react';
 // Connect to the socket server with proper error handling
 let socket;
 try {
-  socket = io('http://localhost:5000', {
+  socket = io('https://legacymd.vercel.app', {
     withCredentials: true,
     transports: ['websocket', 'polling'],
     reconnectionAttempts: 5,
