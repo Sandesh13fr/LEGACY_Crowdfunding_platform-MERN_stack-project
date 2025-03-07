@@ -12,7 +12,7 @@ function Campaigns() {
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
-        const response = await api.get("//api/campaigns");
+        const response = await api.get("/api/campaigns");
         setCampaigns(response.data);
       } catch (error) {
         console.error("Error fetching campaigns:", error);
