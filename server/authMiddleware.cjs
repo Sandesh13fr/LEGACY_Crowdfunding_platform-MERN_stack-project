@@ -231,7 +231,7 @@ app.get('/api/profile', authMiddleware, async (req, res) => {
 });
 
 // **Create Campaign Route**
-app.post('/api/campaigns', authMiddleware, uploadMemory.single('poster'), async (req, res) => {
+app.post('//api/campaigns', authMiddleware, uploadMemory.single('poster'), async (req, res) => {
   try {
     const { title, description, goal, deadline } = req.body;
     const userId = req.userId;
@@ -269,7 +269,7 @@ app.post('/api/campaigns', authMiddleware, uploadMemory.single('poster'), async 
 });
 
 // **Get Campaigns Route**
-app.get('/api/campaigns', async (req, res) => {
+app.get('//api/campaigns', async (req, res) => {
   try {
     const { campaigns } = await connectDb();
     const campaignsList = await campaigns.find().toArray();
@@ -281,7 +281,7 @@ app.get('/api/campaigns', async (req, res) => {
 });
 
 // **Delete Campaign Route**
-app.delete('/api/campaigns/:id', authMiddleware, async (req, res) => {
+app.delete('//api/campaigns/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.userId;
@@ -299,7 +299,7 @@ app.delete('/api/campaigns/:id', authMiddleware, async (req, res) => {
 });
 
 // **Update Campaign Route**
-app.put('/api/campaigns/:id', authMiddleware, uploadMemory.single('poster'), async (req, res) => {
+app.put('//api/campaigns/:id', authMiddleware, uploadMemory.single('poster'), async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description, goal, deadline } = req.body;
@@ -339,7 +339,7 @@ app.put('/api/campaigns/:id', authMiddleware, uploadMemory.single('poster'), asy
 });
 
 // **Donate to Campaign Route**
-app.post('/api/campaigns/:id/donate', authMiddleware, async (req, res) => {
+app.post('//api/campaigns/:id/donate', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     const { amount } = req.body;
@@ -366,7 +366,7 @@ app.post('/api/campaigns/:id/donate', authMiddleware, async (req, res) => {
 });
 
 // **Get Campaign Donations Route**
-app.get('/api/campaigns/:id/donations', authMiddleware, async (req, res) => {
+app.get('//api/campaigns/:id/donations', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.userId;
