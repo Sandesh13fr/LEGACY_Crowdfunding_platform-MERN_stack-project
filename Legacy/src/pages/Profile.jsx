@@ -155,7 +155,7 @@ function Profile() {
                       userData.profilePicture
                         ? userData.profilePicture.startsWith("http")
                           ? userData.profilePicture
-                          : `http://localhost:5000${userData.profilePicture}`
+                          : `https://legacy-api-rbyi.onrender.com${userData.profilePicture}`
                         : "https://placehold.co/300x300?font=raleway&text=Profile\Picture"
                     }
                     alt="Profile"
@@ -202,7 +202,7 @@ function Profile() {
                       userData.profilePicture
                         ? userData.profilePicture.startsWith("http")
                           ? userData.profilePicture
-                          : `http://localhost:5000${userData.profilePicture}`
+                          : `https://legacy-api-rbyi.onrender.com${userData.profilePicture}`
                         : "https://placehold.co/300x300?font=raleway&text=Profile\Picture"
                     }
                     alt="Profile"
