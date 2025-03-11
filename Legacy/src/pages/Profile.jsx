@@ -127,6 +127,15 @@ function Profile() {
       setError(error.response?.data?.error || "Error updating profile");
     }
   };
+  const getProfileImageUrl = (url) => {
+    if (!url) return "https://placehold.co/300x300?font=raleway&text=ProfilePicture";
+    // If the URL contains localhost, replace it with your Render domain
+    if (url.includes("localhost:5000")) {
+      return url.replace("http://localhost:5000", "https://legacy-api-rbyi.onrender.com");
+    }
+    // Otherwise, if the URL is absolute but doesn't start with HTTPS, ensure using HTTPS.
+    return url.startsWith("http") ? url : `https://legacy-api-rbyi.onrender.com${url}`;
+  };
 
   return (
     <div className="pt-24 min-h-screen bg-gray-50">
@@ -150,17 +159,7 @@ function Profile() {
             <div>
               <div className="flex flex-col items-center mb-6">
                 <div className="mb-4">
-                  <img
-                    src={
-                      userData.profilePicture
-                        ? userData.profilePicture.startsWith("http")
-                          ? userData.profilePicture
-                          : `https://legacy-api-rbyi.onrender.com${userData.profilePicture}`
-                        : "https://placehold.co/300x300?font=raleway&text=Profile\Picture"
-                    }
-                    alt="Profile"
-                    className="w-32 h-32 rounded-full object-cover border-2 border-emerald-500"
-                  />
+                 
                 </div>
               </div>
 
@@ -197,17 +196,11 @@ function Profile() {
             <form onSubmit={handleUpdateProfile}>
               <div className="flex flex-col items-center mb-6">
                 <div className="mb-4 relative">
-                  <img
-                    src={
-                      userData.profilePicture
-                        ? userData.profilePicture.startsWith("http")
-                          ? userData.profilePicture
-                          : `https://legacy-api-rbyi.onrender.com${userData.profilePicture}`
-                        : "https://placehold.co/300x300?font=raleway&text=Profile\Picture"
-                    }
-                    alt="Profile"
-                    className="w-32 h-32 rounded-full object-cover border-2 border-emerald-500"
-                  />
+                 <img
+  src={getProfileImageUrl(userData.profilePicture)}
+  alt="Profile"
+  className="w-32 h-32 rounded-full object-cover border-2 border-emerald-500"
+/>
                   <button
                     type="button"
                     onClick={triggerFileInput}
