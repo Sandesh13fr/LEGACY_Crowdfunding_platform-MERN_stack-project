@@ -11,7 +11,9 @@ const transportsOption = isProductionOnVercel ? ['polling'] : ['websocket', 'pol
 
 let socket;
 try {
-  const socketUrl = window.location.origin;
+  const socketUrl = process.env.NODE_ENV === 'production'
+  ? 'https://legacy-api-rbyi.onrender.com'
+  : 'http://localhost:5000';;
   socket = io(socketUrl, {
     withCredentials: true,
     transports: transportsOption,
