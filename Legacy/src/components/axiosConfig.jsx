@@ -1,8 +1,9 @@
 import axios from 'axios';
+
 export const api = axios.create({
   baseURL:
     process.env.NODE_ENV === 'production'
-      ? window.location.origin
+      ? 'https://legacy-api-rbyi.onrender.com'
       : 'http://localhost:5000',
   timeout: 10000,
   headers: {
