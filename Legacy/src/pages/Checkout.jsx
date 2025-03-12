@@ -12,7 +12,7 @@ function Checkout() {
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
-        const response = await api.get('/campaigns', {
+        const response = await api.get('/api/campaigns', {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           },
