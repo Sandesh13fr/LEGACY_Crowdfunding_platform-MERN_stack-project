@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../api';
+import api from '../components/axiosConfig';
 import qrImage from '../assets/qr.jpeg';
 
 function Checkout() {
