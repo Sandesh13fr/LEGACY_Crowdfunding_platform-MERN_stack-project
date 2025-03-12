@@ -51,7 +51,7 @@ function Home() {
     if (!isLoggedIn) {
       navigate('/signin');
     } else {
-      navigate(`/Checkout?campaign=${encodeURIComponent(campaignTitle)}`);
+      navigate(`/checkout`);
     }
   };
 

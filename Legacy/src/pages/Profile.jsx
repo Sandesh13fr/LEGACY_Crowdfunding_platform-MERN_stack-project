@@ -130,7 +130,7 @@ function Profile() {
   const getProfileImageUrl = (url) => {
     if (!url) return "https://placehold.co/300x300?font=raleway&text=ProfilePicture";
     if (url.includes("localhost:5000")) {
-      return url.replace("http://localhost:5000", "https://legacy-api-rbyi.onrender.com");
+      return url.replace("https://legacy-api-rbyi.onrender.com", "http://localhost:5000");
     }
     return url.startsWith("http") ? url : `https://legacy-api-rbyi.onrender.com${url}`;
   };
