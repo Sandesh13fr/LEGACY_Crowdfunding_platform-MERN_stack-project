@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../components/axiosConfig';
+import { api } from '../components/axiosConfig';
 import qrImage from '../assets/qr.jpeg';
 
 function Checkout() {
@@ -80,11 +80,10 @@ function Checkout() {
                 </select>
               </div>
             )}
-            {selectedCampaign && (
-              <div className="mb-6">
-                <img src={qrImage} alt="QR Code" className="mx-auto w-80 bg-blend-difference rounded-4xl" />
-              </div>
-            )}
+            {/* Always display the QR image from assets */}
+            <div className="mb-6">
+              <img src={qrImage} alt="QR Code" className="mx-auto w-80 bg-blend-difference rounded-4xl" />
+            </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Thank You!</h2>
               <p className="text-gray-600">
